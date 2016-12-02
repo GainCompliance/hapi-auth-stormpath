@@ -1,0 +1,42 @@
+{
+  "name": "hapi-auth-stormpath",
+  "license": "MIT",
+  "author": "Gain Compliance",
+  "maintainers" : [
+    "Matt Travi <npm@travi.org> (https://matt.travi.org)"
+  ],
+  "description": "Stormpath authentication plugin for hapi",
+  "scripts": {
+    "tests:unit": "mocha --recursive test/unit",
+    "test": "run-s tests:*",
+    "commitmsg": "validate-commit-msg",
+    "precommit": "npm test"
+  },
+  "main": "lib/plugin.cjs.js",
+  "module": "lib/plugin.es.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GainCompliance/hapi-auth-stormpath.git"
+  },
+  "bugs": {
+    "url": "https://github.com/GainCompliance/ihapi-auth-stormpath/issues"
+  },
+  "homepage": "https://github.com/GainCompliance/hapi-auth-stormpath#readme",
+  "publishConfig": {
+    "access": "public"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "devDependencies": {
+    "@travi/any": "0.8.0",
+    "chai": "3.5.0",
+    "cz-conventional-changelog": "1.2.0",
+    "husky": "0.11.9",
+    "mocha": "3.2.0",
+    "npm-run-all": "3.1.2",
+    "validate-commit-msg": "2.8.2"
+  }
+}
