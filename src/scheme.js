@@ -1,5 +1,5 @@
-export function register() {
-
+export function register(server, options, next) {
+  next();
 }
 
 register.attributes = {

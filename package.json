@@ -47,6 +47,7 @@
     "npm-run-all": "3.1.2",
     "rollup": "0.36.4",
     "rollup-plugin-babel": "2.6.1",
+    "sinon": "1.17.6",
     "validate-commit-msg": "2.8.2"
   }
 }
