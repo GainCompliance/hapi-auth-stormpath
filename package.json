@@ -2,13 +2,14 @@
   "name": "@gaincompliance/hapi-auth-stormpath",
   "license": "MIT",
   "author": "Gain Compliance",
-  "maintainers" : [
+  "maintainers": [
     "Matt Travi <npm@travi.org> (https://matt.travi.org)"
   ],
   "description": "Stormpath authentication plugin for hapi",
   "scripts": {
+    "lint:js": "eslint .",
     "tests:unit": "mocha --recursive test/unit",
-    "test": "run-s tests:*",
+    "test": "run-s lint:* tests:*",
     "commitmsg": "validate-commit-msg",
     "precommit": "npm test"
   },
@@ -31,6 +32,7 @@
     }
   },
   "devDependencies": {
+    "@gaincompliance/eslint-config-gain": "0.2.0",
     "@travi/any": "0.8.0",
     "chai": "3.5.0",
     "cz-conventional-changelog": "1.2.0",

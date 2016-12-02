@@ -1,0 +1,1 @@
+extends: '@gaincompliance/gain/rules/es6'
