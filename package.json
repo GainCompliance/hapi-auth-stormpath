@@ -1,5 +1,6 @@
 {
   "name": "@gaincompliance/hapi-auth-stormpath",
+  "version": "0.0.0-semantically-released",
   "license": "MIT",
   "author": "Gain Compliance",
   "maintainers": [
@@ -12,9 +13,11 @@
     "test": "run-s lint:* tests:*",
     "build": "rollup -c",
     "preversion": "npm test",
-    "prepublish": "npm run build",
     "commitmsg": "validate-commit-msg",
-    "precommit": "npm test"
+    "precommit": "npm test",
+    "presemantic-release": "npm run build",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post",
+    "postpublish": "greenkeeper-postpublish"
   },
   "main": "lib/plugin.cjs.js",
   "module": "lib/plugin.es.js",
@@ -42,11 +45,13 @@
     "babel-preset-es2015-rollup": "1.2.0",
     "chai": "3.5.0",
     "cz-conventional-changelog": "1.2.0",
+    "greenkeeper-postpublish": "1.0.1",
     "husky": "0.11.9",
     "mocha": "3.2.0",
     "npm-run-all": "3.1.2",
     "rollup": "0.36.4",
     "rollup-plugin-babel": "2.6.1",
+    "semantic-release": "6.3.2",
     "sinon": "1.17.6",
     "validate-commit-msg": "2.8.2"
   },
