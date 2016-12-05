@@ -1,6 +1,7 @@
 import joi from 'joi';
 import hoek from 'hoek';
 import nJwt from 'njwt';
+import Boom from 'boom';
 
 function validate(options) {
   const validated = joi.validate(options, joi.object({
@@ -20,13 +21,29 @@ export function scheme(server, options) {
 
   return {
     authenticate(request, reply) {
-      const jwt = nJwt.create({
-        iss: settings.apiKeyId,
-        sub: settings.applicationHref,
-        cb_uri: settings.returnUrl
-      }, settings.apiKeySecret);
+      const jwtResponse = request.query.jwtResponse;
 
-      reply.redirect(`https://api.stormpath.com/sso?jwtRequest=${jwt.compact()}`);
+      if (!jwtResponse) {
+        const jwt = nJwt.create({
+          iss: settings.apiKeyId,
+          sub: settings.applicationHref,
+          cb_uri: settings.returnUrl
+        }, settings.apiKeySecret);
+
+        reply.redirect(`https://api.stormpath.com/sso?jwtRequest=${jwt.compact()}`);
+      } else {
+        nJwt.verify(jwtResponse, settings.apiKeySecret, (err, verifiedJwt) => {
+          if (err) {
+            reply(Boom.wrap(err));
+          } else {
+            reply.continue({
+              credentials: {
+                account: verifiedJwt.body.sub
+              }
+            });
+          }
+        });
+      }
     }
   };
 }
