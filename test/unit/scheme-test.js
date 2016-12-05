@@ -30,6 +30,48 @@ suite('stormpath scheme', () => {
     assert.calledOnce(next);
   });
 
+  suite('options validation', () => {
+    test('that an error is thrown if the application href is not provided', () => {
+      assert.throws(() => scheme(null, {}), 'child "applicationHref" fails because ["applicationHref" is required]');
+    });
+
+    test('that an error is thrown if the application href is not a url', () => {
+      assert.throws(() => scheme(null, {
+        applicationHref: any.string()
+      }), 'child "applicationHref" fails because ["applicationHref" must be a valid uri]');
+    });
+
+    test('that an error is thrown if the api key id is not provided', () => {
+      assert.throws(() => scheme(null, {
+        applicationHref: any.url()
+      }), 'child "apiKeyId" fails because ["apiKeyId" is required]');
+    });
+
+    test('that an error is thrown if the api key secret is not provided', () => {
+      assert.throws(() => scheme(null, {
+        applicationHref: any.url(),
+        apiKeyId: any.string()
+      }), 'child "apiKeySecret" fails because ["apiKeySecret" is required]');
+    });
+
+    test('that an error is thrown if the return url is not provided', () => {
+      assert.throws(() => scheme(null, {
+        applicationHref: any.url(),
+        apiKeyId: any.string(),
+        apiKeySecret: any.string()
+      }), 'child "returnUrl" fails because ["returnUrl" is required]');
+    });
+
+    test('that an error is thrown if the application href is not a url', () => {
+      assert.throws(() => scheme(null, {
+        applicationHref: any.url(),
+        apiKeyId: any.string(),
+        apiKeySecret: any.string(),
+        returnUrl: any.string()
+      }), 'child "returnUrl" fails because ["returnUrl" must be a valid uri]');
+    });
+  });
+
   test('that the request is redirected to ID Site', () => {
     const redirect = sinon.spy();
     const compact = sinon.stub();

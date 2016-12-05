@@ -51,6 +51,8 @@
     "validate-commit-msg": "2.8.2"
   },
   "dependencies": {
+    "hoek": "4.1.0",
+    "joi": "10.0.4",
     "njwt": "0.3.2"
   }
 }
