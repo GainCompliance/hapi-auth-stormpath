@@ -114,6 +114,7 @@ suite('stormpath scheme', () => {
     setup(() => {
       sandbox.stub(nJwt, 'verify');
       sandbox.stub(Boom, 'wrap');
+      sandbox.stub(Boom, 'badImplementation');
     });
 
     test('that the account reference is extracted from the response jwt', () => {
@@ -121,7 +122,10 @@ suite('stormpath scheme', () => {
       const cont = sinon.spy();
       const jwtResponse = any.word();
       const subject = any.url();
-      nJwt.verify.withArgs(jwtResponse, options.apiKeySecret).yields(null, {body: {sub: subject}});
+      nJwt.verify.withArgs(jwtResponse, options.apiKeySecret).yields(null, {body: {
+        sub: subject,
+        status: 'AUTHENTICATED'
+      }});
 
       scheme(null, options).authenticate({query: {jwtResponse}}, {redirect, continue: cont});
 
@@ -135,12 +139,24 @@ suite('stormpath scheme', () => {
       const error = new Error();
       const wrappedError = new Error('wrapped');
       Boom.wrap.withArgs(error).returns(wrappedError);
-
       nJwt.verify.withArgs(jwtResponse, options.apiKeySecret).yields(error);
 
       scheme(null, options).authenticate({query: {jwtResponse}}, reply);
 
       assert.calledWith(reply, wrappedError);
+    });
+
+    test('that a status that is not AUTHENTICATED results in an error', () => {
+      const jwtResponse = any.word();
+      const reply = sinon.spy();
+      const error = any.simpleObject();
+      const status = 'REGISTERED';
+      Boom.badImplementation.withArgs(`The ID Site result of "${status}" was not AUTHENTICATED`).returns(error);
+      nJwt.verify.withArgs(jwtResponse, options.apiKeySecret).yields(null, {body: {status}});
+
+      scheme(null, options).authenticate({query: {jwtResponse}}, reply);
+
+      assert.calledWith(reply, error);
     });
   });
 });

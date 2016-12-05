@@ -35,6 +35,8 @@ export function scheme(server, options) {
         nJwt.verify(jwtResponse, settings.apiKeySecret, (err, verifiedJwt) => {
           if (err) {
             reply(Boom.wrap(err));
+          } else if ('AUTHENTICATED' !== verifiedJwt.body.status) {
+            reply(Boom.badImplementation(`The ID Site result of "${verifiedJwt.body.status}" was not AUTHENTICATED`));
           } else {
             reply.continue({
               credentials: {
