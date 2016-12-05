@@ -8,7 +8,7 @@ function validate(options) {
     apiKeyId: joi.string().required(),
     apiKeySecret: joi.string().required(),
     returnUrl: joi.string().uri().required()
-  }));
+  }).required());
 
   hoek.assert(!validated.error, validated.error);
 

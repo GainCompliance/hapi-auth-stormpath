@@ -31,6 +31,10 @@ suite('stormpath scheme', () => {
   });
 
   suite('options validation', () => {
+    test('that an error is thrown if no options are provided', () => {
+      assert.throws(() => scheme(), '"value" is required');
+    });
+
     test('that an error is thrown if the application href is not provided', () => {
       assert.throws(() => scheme(null, {}), 'child "applicationHref" fails because ["applicationHref" is required]');
     });
