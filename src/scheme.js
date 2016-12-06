@@ -27,7 +27,8 @@ export function scheme(server, options) {
         const jwt = nJwt.create({
           iss: settings.apiKeyId,
           sub: settings.applicationHref,
-          cb_uri: settings.returnUrl
+          cb_uri: settings.returnUrl,
+          state: JSON.stringify(request.url.query)
         }, settings.apiKeySecret);
 
         reply.redirect(`https://api.stormpath.com/sso?jwtRequest=${jwt.compact()}`);
@@ -40,7 +41,8 @@ export function scheme(server, options) {
           } else {
             reply.continue({
               credentials: {
-                account: verifiedJwt.body.sub
+                account: verifiedJwt.body.sub,
+                next: JSON.parse(verifiedJwt.body.state).next
               }
             });
           }

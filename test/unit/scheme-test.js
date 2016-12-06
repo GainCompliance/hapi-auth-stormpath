@@ -83,6 +83,7 @@ suite('stormpath scheme', () => {
       const cont = sinon.spy();
       const compact = sinon.stub();
       const compactedJwt = any.word();
+      const next = any.string();
       const options = {
         applicationHref: any.url(),
         apiKeyId: any.string(),
@@ -92,11 +93,12 @@ suite('stormpath scheme', () => {
       nJwt.create.withArgs({
         iss: options.apiKeyId,
         sub: options.applicationHref,
-        cb_uri: options.returnUrl
+        cb_uri: options.returnUrl,
+        state: JSON.stringify({next})
       }, options.apiKeySecret).returns({compact});
       compact.returns(compactedJwt);
 
-      scheme(null, options).authenticate({query: {}}, {redirect, continue: cont});
+      scheme(null, options).authenticate({query: {}, url: {query: {next}}}, {redirect, continue: cont});
 
       assert.calledWith(redirect, `https://api.stormpath.com/sso?jwtRequest=${compactedJwt}`);
       assert.notCalled(cont);
@@ -117,19 +119,21 @@ suite('stormpath scheme', () => {
       sandbox.stub(Boom, 'badImplementation');
     });
 
-    test('that the account reference is extracted from the response jwt', () => {
+    test('that the account reference and next are extracted from the response jwt', () => {
       const redirect = sinon.spy();
       const cont = sinon.spy();
       const jwtResponse = any.word();
       const subject = any.url();
+      const next = any.string();
       nJwt.verify.withArgs(jwtResponse, options.apiKeySecret).yields(null, {body: {
         sub: subject,
-        status: 'AUTHENTICATED'
+        status: 'AUTHENTICATED',
+        state: JSON.stringify({next})
       }});
 
       scheme(null, options).authenticate({query: {jwtResponse}}, {redirect, continue: cont});
 
-      assert.calledWith(cont, {credentials: {account: subject}});
+      assert.calledWith(cont, {credentials: {account: subject, next}});
       assert.notCalled(redirect);
     });
 
