@@ -41,7 +41,7 @@
   },
   "devDependencies": {
     "@gaincompliance/eslint-config-gain": "0.2.2",
-    "@travi/any": "1.0.1",
+    "@travi/any": "1.0.2",
     "babel-cli": "6.18.0",
     "babel-preset-es2015-node": "6.1.1",
     "babel-preset-es2015-rollup": "3.0.0",
