@@ -40,7 +40,7 @@
     }
   },
   "devDependencies": {
-    "@gaincompliance/eslint-config-gain": "0.2.2",
+    "@gaincompliance/eslint-config-gain": "0.3.0",
     "@travi/any": "1.0.2",
     "babel-cli": "6.18.0",
     "babel-preset-es2015-node": "6.1.1",
