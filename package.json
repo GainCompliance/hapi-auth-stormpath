@@ -28,7 +28,7 @@
     "url": "git+https://github.com/GainCompliance/hapi-auth-stormpath.git"
   },
   "bugs": {
-    "url": "https://github.com/GainCompliance/ihapi-auth-stormpath/issues"
+    "url": "https://github.com/GainCompliance/hapi-auth-stormpath/issues"
   },
   "homepage": "https://github.com/GainCompliance/hapi-auth-stormpath#readme",
   "publishConfig": {
