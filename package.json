@@ -57,7 +57,7 @@
     "rollup-plugin-babel": "2.7.1",
     "semantic-release": "6.3.2",
     "sinon": "1.17.7",
-    "validate-commit-msg": "2.8.2"
+    "validate-commit-msg": "2.11.1"
   },
   "dependencies": {
     "boom": "4.2.0",
