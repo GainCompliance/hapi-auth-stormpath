@@ -52,7 +52,7 @@
     "husky": "0.13.3",
     "mocha": "3.3.0",
     "npm-run-all": "4.0.2",
-    "nyc": "10.2.0",
+    "nyc": "10.3.0",
     "rollup": "0.41.6",
     "rollup-plugin-babel": "2.7.1",
     "semantic-release": "6.3.2",
