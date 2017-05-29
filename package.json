@@ -60,7 +60,7 @@
     "validate-commit-msg": "2.12.1"
   },
   "dependencies": {
-    "boom": "5.0.0",
+    "boom": "5.1.0",
     "hoek": "4.1.1",
     "joi": "10.5.0",
     "njwt": "0.4.0"
