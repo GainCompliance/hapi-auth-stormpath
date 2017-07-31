@@ -48,7 +48,7 @@
     "codecov": "2.2.0",
     "cz-conventional-changelog": "2.0.0",
     "husky": "0.14.3",
-    "mocha": "3.4.2",
+    "mocha": "3.5.0",
     "npm-run-all": "4.0.2",
     "nyc": "11.1.0",
     "rollup": "0.45.2",
