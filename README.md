@@ -2,6 +2,10 @@
 
 Stormpath authentication plugin for hapi
 
+[![No Maintenance Intended](http://unmaintained.tech/badge.svg)](http://unmaintained.tech/)
+The [Stormpath](https://stormpath.com/) service has been [shut down](https://stormpath.com/blog/stormpaths-new-path),
+so this plugin no longer provides value.
+
 [![npm](https://img.shields.io/npm/v/@gaincompliance/hapi-auth-stormpath.svg?maxAge=2592000)](https://www.npmjs.com/package/@gaincompliance/hapi-auth-stormpath)
 [![license](https://img.shields.io/github/license/GainCompliance/hapi-auth-stormpath.svg)](LICENSE)
 
@@ -21,13 +25,13 @@ $ npm install @gaincompliance/hapi-auth-stormpath -S
 
 ## Usage
 
-Include this plugin in the [manifest](https://github.com/hapijs/glue) of your hapi application to make the 
+Include this plugin in the [manifest](https://github.com/hapijs/glue) of your hapi application to make the
 [Stormpath](https://stormpath.com/) authentication scheme available to your application. When registered for a route,
-a user will be directed to Stormpath's [ID Site](https://docs.stormpath.com/rest/product-guide/latest/idsite.html) for 
+a user will be directed to Stormpath's [ID Site](https://docs.stormpath.com/rest/product-guide/latest/idsite.html) for
 your registered application to authenticate.
 
 Once the scheme has been registered, register a [strategy](http://hapijs.com/tutorials/auth#strategies) that uses the
-`stormpath` scheme provided by this plugin. 
+`stormpath` scheme provided by this plugin.
 
 ### Configuration
 
@@ -38,9 +42,9 @@ configuration:
  * `apiKeySecret` (_required_) - the api key secret from your Stormpath application
  * `applicationHref` (_required_) - the url that identifies your application according to the Stormpath API
  * `returnUrl` (_required_) - the fully qualified url that ID Site should send the user back to after authentication
- 
+
  ### Example
- 
+
 ```js
 export function register(server, options, next) {
   server.auth.strategy('stormpath', 'stormpath', {
@@ -54,6 +58,6 @@ export function register(server, options, next) {
 }
 
 register.attributes = {
-  name: 'authentication-strategy'    
+  name: 'authentication-strategy'
 };
 ```
